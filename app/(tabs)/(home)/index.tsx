@@ -15,23 +15,23 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <TouchableOpacity onPress={() => router.push(`/`)}>
+      <TouchableOpacity onPress={() => router.replace(`/`)}>
         <Text style={{ color: pathname === "/" ? "red" : "black" }}>
           For you
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push(`/following`)}>
+      <TouchableOpacity onPress={() => router.replace(`/following`)}>
         <Text style={{ color: pathname === "/" ? "black" : "red" }}>
           Following
         </Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push(`/@user/post/1`)}>
+      <TouchableOpacity onPress={() => router.replace(`/@user/post/1`)}>
         <Text>게시글1</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push(`/@user/post/2`)}>
+      <TouchableOpacity onPress={() => router.replace(`/@user/post/2`)}>
         <Text>게시글2</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => router.push(`/@user/post/3`)}>
+      <TouchableOpacity onPress={() => router.replace(`/@user/post/3`)}>
         <Text>게시글3</Text>
       </TouchableOpacity>
     </View>

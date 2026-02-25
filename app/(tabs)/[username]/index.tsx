@@ -14,13 +14,17 @@ export default function Index() {
       }}
     >
       <View>
-        <TouchableOpacity onPress={() => router.push(`/${username}`)}>
+        <TouchableOpacity onPress={() => router.replace(`/${username}`)}>
           <Text>Threads</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.push(`/${username}/replies`)}>
+        <TouchableOpacity
+          onPress={() => router.replace(`/${username}/replies`)}
+        >
           <Text>Replies</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => router.push(`/${username}/reposts`)}>
+        <TouchableOpacity
+          onPress={() => router.replace(`/${username}/reposts`)}
+        >
           <Text>Reposts</Text>
         </TouchableOpacity>
       </View>
