@@ -60,6 +60,13 @@ export default function Modal() {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const [isPosting, setIsPosting] = useState(false);
 
+  // Modal() 함수 안, 상태 선언 부근에 추가
+  const [hashtagPickerThreadId, setHashtagPickerThreadId] = useState<
+    string | null
+  >(null);
+
+  const hashtags = ["개발자모임", "비개발자모임"];
+
   const replyOptions = ["Anyone", "Profiles you follow", "Mentioned only"];
 
   const handleCancel = () => {
@@ -149,7 +156,87 @@ export default function Modal() {
       </View>
       <View style={styles.contentContainer}>
         <View style={styles.userInfoContainer}>
-          <Text style={styles.username}>nagul2</Text>
+          {hashtagPickerThreadId === item.id && (
+            <View
+              style={{
+                backgroundColor: "#2a2a2a",
+                borderRadius: 12,
+                padding: 8,
+                position: "absolute",
+                top: 24,
+                left: 0,
+                zIndex: 10,
+                minWidth: 200,
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 4 },
+                shadowOpacity: 0.3,
+                shadowRadius: 8,
+                elevation: 5,
+              }}
+            >
+              <Text
+                style={{
+                  color: "#8e8e93",
+                  fontSize: 13,
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                }}
+              >
+                Community
+              </Text>
+              {hashtags.map((tag) => (
+                <Pressable
+                  key={tag}
+                  onPress={() => {
+                    setThreads((prev) =>
+                      prev.map((t) =>
+                        t.id === item.id ? { ...t, hashtag: tag } : t,
+                      ),
+                    );
+                    setHashtagPickerThreadId(null);
+                  }}
+                  style={{ paddingVertical: 10, paddingHorizontal: 12 }}
+                >
+                  <Text
+                    style={{
+                      color: "#ffffff",
+                      fontSize: 15,
+                      fontWeight: "600",
+                    }}
+                  >
+                    {tag}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          )}
+
+          <View style={{ flexDirection: "row", alignItems: "center", flex: 1 }}>
+            <Text style={styles.username}>nagul2</Text>
+            <Pressable
+              onPress={() =>
+                setHashtagPickerThreadId(
+                  hashtagPickerThreadId === item.id ? null : item.id,
+                )
+              }
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                marginLeft: 4,
+              }}
+            >
+              <Text style={{ color: "#8e8e93", fontSize: 15 }}> › </Text>
+              <Text
+                style={{
+                  color: item.hashtag ? "#000" : "#8e8e93",
+                  fontSize: 15,
+                }}
+              >
+                {item.hashtag || "Add a topic"}
+              </Text>
+            </Pressable>
+          </View>
+
           {index > 0 && (
             <TouchableOpacity
               onPress={() => removeThread(item.id)}
