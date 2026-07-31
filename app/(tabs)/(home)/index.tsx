@@ -1,31 +1,25 @@
+import { AuthContext } from "@/app/_layout";
 import { BlurView } from "expo-blur";
 import { usePathname, useRouter } from "expo-router";
-import {
-  Dimensions,
-  Image,
-  PixelRatio,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { useContext } from "react";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
   const router = useRouter();
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
+  const { user } = useContext(AuthContext);
+  const isLoggedIn = !!user;
 
-  const isLoggedIn = true;
+  //   console.log("pathname", pathname);
+  //   console.log("insets", insets);
 
-  console.log("pathname", pathname);
-  console.log("insets", insets);
-
-  const { width, height } = Dimensions.get("window");
-  console.log(`화면 너비: ${width}, 화면 높이: ${height}`);
-  console.log(
-    `화면 너비: ${width * PixelRatio.get()}px, 화면 높이: ${height * PixelRatio.get()}px`,
-  );
+  //   const { width, height } = Dimensions.get("window");
+  //   console.log(`화면 너비: ${width}, 화면 높이: ${height}`);
+  //   console.log(
+  //     `화면 너비: ${width * PixelRatio.get()}px, 화면 높이: ${height * PixelRatio.get()}px`,
+  //   );
 
   return (
     <View
